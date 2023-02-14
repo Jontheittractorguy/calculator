@@ -22,6 +22,7 @@ const negative = document.getElementById('negative');
 const period = document.getElementById('period');
 let operand = [];
 let number;
+let sign = false;
 let equalPressed = false;
 let lastPressed;
 
@@ -57,11 +58,17 @@ function text(value){
         typed.textContent = value;
         lastPressed = value;
         number += value;
-    } else {
+    } else if (sign == true){
         operation.textContent += value;
         typed.textContent = value;
         lastPressed = value;
         number += value;
+    } else {
+        operation.textContent += value;
+        typed.textContent += value;
+        lastPressed = value;
+        number += value;
+        sign = false;
     }
 }
 
@@ -73,18 +80,22 @@ function display(arg){
         operation.textContent += "+";
         typed.textContent = "+"
         lastPressed = "+";
+        sign = true;
     } else if (arg == "divides") {
         operation.textContent += divide.textContent;;
         typed.textContent = divide.textContent;
         lastPressed = divide.textContent;
+        sign = true;
     } else if (arg == "multiplies"){
-        operation.textContent = multiply.textContent;
+        operation.textContent += multiply.textContent;
         typed.textContent = multiply.textContent;
         lastPressed = multiply.textContent;
+        sign = true;
     } else if (arg == "subtracts"){
-        operation.textContent = "-";
+        operation.textContent += "-";
         typed.textContent = "-";
         lastPressed = "-";
+        sign = true;
     }
     operand.push(Number(number));
     number = "";
@@ -94,13 +105,17 @@ function clearText(){
     if (equalPressed == true){
         cleared();
     } else {
-        operand.pop();
+        if (sign == true){
+            operand.shift();
+            sign = false;
+        } else {
+            operand.pop();
+        }
+        console.log(operand);
         let text = operation.textContent;
-        console.log(typeof lastPressed);
-        let reg = new RegExp(lastPressed,"g")
-        text.replace(reg,"");
-        console.log(text);
-        operation.textContent = text;
+        let newest = text.replace(lastPressed,"");
+        operation.textContent = newest;
+        typed.textContent = "";
     }
 }
 

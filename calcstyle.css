@@ -49,7 +49,7 @@ body{
     font-size: 700%; 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex;
 }
 
 @font-face{
@@ -58,6 +58,7 @@ body{
    }
 
 #typedDisplay{
+    flex: 1;
     font-family: 'digital-clock-font';
     background-color: rgb(125, 140, 115);
     border:1vh solid black;

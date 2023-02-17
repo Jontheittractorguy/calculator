@@ -228,4 +228,4 @@ function remove(){
     operation.textContent = firstPart;
 }
 
-window.onload = cleared();
+window.onload = ()=> {cleared(); typed.textContent = "Hello"};

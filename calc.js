@@ -32,6 +32,9 @@ keys.addEventListener('click',e => {
             }
             signs = false;
             equalSign = false;
+        } else if (action == "percent") {
+            percentage(displayNumb);
+            content = "";
         } else if (action == "equal"){
             let totals = operate(operand);
             display.textContent = totals;
@@ -70,7 +73,7 @@ function operate(array){
     equalSign = true;
     if (isNaN(array.slice(-1)) || isNaN(array.slice(0,1))){
         return "OOPS";
-    }
+     }
     const arry = array.join("");
     const times = arry.toString().replace("\u00F7","/");
     const multy = times.toString().replace("\u00D7","*")
@@ -117,6 +120,18 @@ function plusMinus(x){
 }
 
 // percentage button
-function percentage(){
+function percentage(x){
+    let percents = x/100;
+    display.textContent = percents;
+    for (let i = 0;i<x.length;i++){
+        operand.pop();
+    }
+    operand.push(percents);
+    let removed = operates.slice(0,operates.length - x.length);
+    operates = removed + percents;
+}
 
+// errors
+window.onerror = (e)=>{
+    display.textContent = "Error use CE"
 }
